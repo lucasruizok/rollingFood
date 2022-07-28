@@ -34,7 +34,7 @@ export const Navbar = () => {
                             <NavLink
                                 to='/'
                             >
-                                LOGO
+                                LOGO1
                             </NavLink>
 
                         </li>
