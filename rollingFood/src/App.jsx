@@ -2,7 +2,8 @@ import './App.css';
 import React from 'react';
 //componentes Ant Desing
 const { Header, Footer, Content } = Layout;
-import { Layout } from 'antd';
+import {  Layout } from 'antd';
+
 
 //componentes para react route
 import {
@@ -17,13 +18,14 @@ import{ Error404 } from './layout/error404/Error404';
 import{ Menu } from './layout/menu/Menu';
 import { Login } from './layout/login/Login';
 import{ Register } from './layout/register/Register';
+// import Cards from './components/cards';
 
 // Componente principal
 function App() {
 
   return (
     <>
-       <Layout>
+    <Layout>
       <Header>
         <Navbar></Navbar>
       </Header>
