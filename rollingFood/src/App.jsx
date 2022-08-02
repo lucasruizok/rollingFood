@@ -17,6 +17,8 @@ import{ Error404 } from './layout/error404/Error404';
 import{ Menu } from './layout/menu/Menu';
 import { Login } from './layout/login/Login';
 import{ Register } from './layout/register/Register';
+import {Pedidos} from './layout/pedidos/Pedidos'
+import { About } from './layout/about/About';
 
 // Componente principal
 function App() {
@@ -35,6 +37,12 @@ function App() {
           <Route
                 path='menu'
                 element={<Menu/>}/>
+          <Route
+                path='pedidos'
+                element={<Pedidos/>}/>
+          <Route
+                path='about'
+                element={<About/>}/>
           <Route
                 path='login'
                 element={<Login/>}/>
