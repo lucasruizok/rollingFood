@@ -39,6 +39,10 @@ img{
 .ant-layout-header{
     padding: 0 !important;
 }
+.logoNav{
+    height: 1em;
+}
+
 @media (max-width: 992px){
     .btnLogin{
         visibility: hidden;

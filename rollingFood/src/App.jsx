@@ -19,6 +19,7 @@ import { Login } from './layout/login/Login';
 import{ Register } from './layout/register/Register';
 import {Pedidos} from './layout/pedidos/Pedidos'
 import { About } from './layout/about/About';
+import { FooterRolling } from './layout/footer/FooterRolling';
 
 // Componente principal
 function App() {
@@ -54,7 +55,9 @@ function App() {
                 element={<Error404/>}/>
         </Routes>
       </Content>
-      <Footer>Footer</Footer>
+      <Footer>
+            <FooterRolling></FooterRolling>
+      </Footer>
     </Layout>
     </>
   )
