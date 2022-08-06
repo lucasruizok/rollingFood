@@ -16,9 +16,14 @@ export const Navbar = () => {
         {
             title: 'PEDIDOS',
             path: 'pedidos'
-        },{
+        },
+        {
             title: 'CONOCENOS',
             path: 'about'
+        },
+        {
+            title: 'Adminitrar',
+            path: 'admin'
         }
     ]
     let activeStyle = {

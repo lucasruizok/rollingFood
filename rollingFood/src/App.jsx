@@ -1,5 +1,6 @@
-import './App.css';
 import React from 'react';
+import './App.css';
+import 'antd/dist/antd.css';
 //componentes Ant Desing
 const { Header, Footer, Content } = Layout;
 import { Layout } from 'antd';
@@ -20,7 +21,7 @@ import{ Register } from './layout/register/Register';
 import {Pedidos} from './layout/pedidos/Pedidos'
 import { About } from './layout/about/About';
 import { FooterRolling } from './layout/footer/FooterRolling';
-
+import { Admin } from './layout/admin/Admin';
 // Componente principal
 function App() {
 
@@ -50,6 +51,9 @@ function App() {
           <Route
                 path='register'
                 element={<Register/>}/>
+          <Route
+                path='admin'
+                element={<Admin/>}/>
           <Route
                 path='*'
                 element={<Error404/>}/>
