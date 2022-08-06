@@ -7,28 +7,34 @@ export const Navbar = () => {
     const links = [
         {
             title: 'INICIO',
-            path: '/'
+            path: '/',
+            protected: false
         },
         {
             title: 'MENU',
-            path: 'menu'
+            path: 'menu',
+            protected: false
         },
         {
             title: 'PEDIDOS',
-            path: 'pedidos'
+            path: 'pedidos',
+            protected: true
         },
         {
             title: 'CONOCENOS',
-            path: 'about'
+            path: 'about',
+            protected: false
         },
         {
             title: 'Adminitrar',
-            path: 'admin'
+            path: 'admin',
+            protected: true
         }
     ]
     let activeStyle = {
         textDecoration: "underline",
     };
+    const currentUser = 'null';
 
     return (
         <>
@@ -49,6 +55,8 @@ export const Navbar = () => {
                             {
                                 links.map(link => {
                                     return (
+                                        link.protected && !currentUser ? '' :
+                                        
                                         <li className='nav-item'>
                                             <NavLink
                                                 to={link.path}
