@@ -4,13 +4,18 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { AdminUsers } from './AdminUsers';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
+
+//PAGES
+import { SideBarAdmin } from './SideBarAdmin';
+import { AdminUsers } from './AdminUsers';
+import { AdminProducts } from './AdminProducts';
+import { AdminOrders } from './AdminOrders';
 
 
 export const Admin = () => {
@@ -21,42 +26,9 @@ export const Admin = () => {
     <div>
       <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed}>
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'Clientes',
-                path: 'users'
-              },
-              {
-                key: '2',
-                icon: <UserOutlined />,
-                label: 'Productos',
-              },
-              {
-                key: '3',
-                icon: <UserOutlined />,
-                label: 'Pedidos',
-              },
-            ]}
-          />
+          <SideBarAdmin/>
         </Sider>
         <Layout className="site-layout">
-          <Header
-            className="site-layout-background"
-            style={{
-              padding: 0,
-            }}
-          >
-            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: () => setCollapsed(!collapsed),
-            })}
-          </Header>
           <Content
             className="site-layout-background"
             style={{
@@ -69,8 +41,13 @@ export const Admin = () => {
               <Route
                 path='users'
                 element={<AdminUsers/>} />
+              <Route
+                path='products'
+                element={<AdminProducts/>} />
+              <Route
+                path='orders'
+                element={<AdminOrders/>} />
             </Routes>
-            <AdminUsers/>
           </Content>
         </Layout>
       </Layout>
