@@ -5,7 +5,7 @@ export const PrivateRoutes = ({ children }) => {
     const user = 'null' ;
   return (
     
-        user ? children : <Navigate to={'login'} replace/>
+        user ? children : <Navigate to='/login' replace/>
     
   )
 }

@@ -36,6 +36,10 @@ export const Navbar = () => {
     };
     const currentUser = 'null';
 
+    function collapsenavbar(){
+        const navbar = document.getElementById('navbarNavDropdown');
+        navbar.classList.remove('show');
+    }
     return (
         <>
             <nav className='navbar-expand-lg navbar'>
@@ -59,6 +63,7 @@ export const Navbar = () => {
                                         
                                         <li className='nav-item'>
                                             <NavLink
+                                                onClick={() => collapsenavbar() }
                                                 to={link.path}
                                                 style={({ isActive }) =>
                                                     isActive ? activeStyle : undefined

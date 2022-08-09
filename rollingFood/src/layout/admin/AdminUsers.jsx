@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
-import { Button, Table, Tag, Space } from 'antd';
+import { Switch, Table, Tag, Space } from 'antd';
 import { ModalAdmin } from './ModalAdmin';
+
+const onChange = (e) => {
+  console.log(`switch to ${e}`);
+  if(e === false){
+    <>
+    <p>hola</p>
+    </>
+  }
+  
+};
 const columns = [
   {
-    title: 'Nombre',
+    title: 'Name',
     dataIndex: 'name',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
+    title: 'Age',
+    dataIndex: 'age',
   },
   {
-    title: 'Rol',
-    dataIndex: 'role',
+    title: 'Address',
+    dataIndex: 'address',
   },
   {
     title: 'Estado',
@@ -22,10 +32,14 @@ const columns = [
       <>
         {tags.map((tag) => {
           let color = tag === 'activo' ? 'green' : 'red';
+          console.log(tag);
           return (
+            <>
+            <Switch defaultChecked size='small' onChange={onChange} />
             <Tag color={color} key={tag}>
               {tag.toUpperCase()}
             </Tag>
+            </>
           );
         })}
       </>
@@ -36,73 +50,37 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a className='btn btn-outline-warning'>Modificar</a>
         <a className='btn btn-outline-danger'>Eliminar</a>
-        <a className='btn '>Dest</a>
-      </Space>  
+      </Space>
     ),
   },
 ];
-const data = [];
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['activo']
+  },
+  {
+    key: '1',
+    name: 'hola',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['activo']
+  },
+]
 
-for (let i = 0; i < 6; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    email: 'lucas@gmail.com',
-    role: `Administrador`,
-    tags: ['activo'],
-  });
-}
 
 export const AdminUsers = () => {
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const start = () => {
-    setLoading(true); // ajax request after empty completing
-
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
-  };
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
 
   return (
 
     <div className='container'>
-      <h1 className='text-center'>ADMINISTRAR USUARIOS</h1>
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-        >
-        <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        >
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-        </span>
-      </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-            {/* MODAL */}
-          
+      <h4>LISTA DE USUARIOS</h4>
+      <hr />
+      <Table columns={columns} dataSource={data} size="middle" />
     </div>
   )
 }

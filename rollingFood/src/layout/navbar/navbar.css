@@ -9,6 +9,9 @@ nav{
 .navbarRolling{
     height: 64px;
 }
+.navbar{
+    z-index: 100;
+}
 img{
     height: 60px;
 }
