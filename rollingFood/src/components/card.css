@@ -23,6 +23,7 @@
   }
   
   .card-img-top {
+    height: 100%;
     transform: scale(1);
     transition: all 0.2s ease-in-out;
   }

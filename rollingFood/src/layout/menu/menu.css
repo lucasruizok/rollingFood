@@ -1,8 +1,9 @@
 .menu {
-    background-color: rgb(220, 69, 64);
+    /* background-color: rgb(226, 76, 31); */
 }
 
 .menu h1 {
     text-align: center;
     text-shadow: 2px 2px 2px white;
+    margin-top: 1rem;
 }

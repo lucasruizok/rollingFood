@@ -16,9 +16,11 @@ import { Navbar } from './layout/navbar/Navbar';
 import { Main } from './layout/main/Main';
 import{ Error404 } from './layout/error404/Error404';
 import{ Menu } from './layout/menu/Menu';
+import { Pedidos } from './layout/pedidos/Pedidos';
+import { About } from './layout/about/About';
 import { Login } from './layout/login/Login';
-import{ Register } from './layout/register/Register';
-// import Cards from './components/cards';
+import { Register } from './layout/register/Register'
+import { FooterRolling } from './layout/footer/FooterRolling';
 
 // Componente principal
 function App() {
@@ -38,6 +40,12 @@ function App() {
                 path='menu'
                 element={<Menu/>}/>
           <Route
+                path='pedidos'
+                element={<Pedidos/>}/>
+          <Route
+                path='about'
+                element={<About/>}/>
+          <Route
                 path='login'
                 element={<Login/>}/>
           <Route
@@ -48,7 +56,9 @@ function App() {
                 element={<Error404/>}/>
         </Routes>
       </Content>
-      <Footer>Footer</Footer>
+      <Footer>
+            <FooterRolling></FooterRolling>
+      </Footer>
     </Layout>
     </>
   )

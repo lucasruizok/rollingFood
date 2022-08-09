@@ -6,9 +6,6 @@ import './menu.css'
 export const Menu = () => {
   return (
     <Fragment>
-    {/* <div className='category'>
-      <h1>Pizzas</h1>
-    </div> */}
     <div className='menu'>
       <h1>Nuestras Pizzas</h1>
       <Cards />
