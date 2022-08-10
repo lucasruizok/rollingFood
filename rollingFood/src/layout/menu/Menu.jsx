@@ -13,7 +13,7 @@ export const Menu = () => {
 
   return (
     <Fragment>
-    <div className='menu'>
+    <div className='container'>
       <h1>Nuestras Pizzas</h1>
       <Amazon handleClick={handleClick} />
     </div>

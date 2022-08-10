@@ -132,12 +132,10 @@ const cards = [
 
 export const Amazon = ({ handleClick }) => {
   return (
-    <div>
-      <section>
+    <div className='row row-cols-1 row-cols-md-3 g-4'>
         {cards.map((item) => (
           <Card key={item.id} item={item} handleClick={handleClick} />
         ))}
-      </section>
     </div>
   );
 }
