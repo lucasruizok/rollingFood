@@ -3,7 +3,7 @@ import "./cart.css"
 
 export const Cart = ({ cart, setCart, handleChange }) => {
     const [price, setPrice] = useState(0);
-
+    
     const handleRemove = (id) => {
         const arr = cart.filter((item) => item.id !== id);
         setCart(arr);
@@ -35,13 +35,13 @@ export const Cart = ({ cart, setCart, handleChange }) => {
           </div>
           <div>
             <span>{item.price}</span>
-            <button onClick={() => handleRemove(item.id)}>Remove</button>
-          </div>
+            <button onClick={() => handleRemove(item.id)}>Eliminar</button>
+          </div>       
         </div>
       ))}
       <div className="total">
-        <span>Total Price of your Cart</span>
-        <span>Rs - {price}</span>
+        <span>Precio total del pedido</span>
+        <span> ${price}</span>
       </div>
     </article>
   );

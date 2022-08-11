@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import Item from "antd/lib/list/Item";
+import React, { Fragment, useState } from "react";
 import { Cart } from "../menu/cart";
 import "../menu/cart.css"
 
 export const Pedidos = () => {
   const [cart, setCart] = useState([]);
+
+  const handleClick = (item) => {
+    if (cart.indexOf(item) !== -1) return;
+    setCart([...cart, item]);
+  };
 
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
@@ -16,9 +20,9 @@ export const Pedidos = () => {
   };
 
   return (
-    <div>
+    <Fragment>
       <h1>PEDIDOS</h1>
       <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
-    </div>
+    </Fragment>
   );
 };

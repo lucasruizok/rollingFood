@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react'
-// import Cards from '../../components/cards'
 import './menu.css'
 import { Amazon } from './amazon'
 
@@ -14,7 +13,7 @@ export const Menu = () => {
   return (
     <Fragment>
     <div className='container'>
-      <h1>Nuestras Pizzas</h1>
+      <h1 className='title'>Nuestras Pizzas</h1>
       <Amazon handleClick={handleClick} />
     </div>
     </Fragment>
