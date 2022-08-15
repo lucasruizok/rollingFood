@@ -26,7 +26,7 @@ export const Navbar = () => {
             protected: false
         },
         {
-            title: 'Adminitrar',
+            title: 'ADMIN',
             path: 'admin',
             protected: true
         }

@@ -4,13 +4,10 @@ import { ModalAdmin } from './ModalAdmin';
 import axios from 'axios';
 import { useEffect } from 'react';
 
+
 export const AdminUsers = () => {  
+  const URL = 'http://localhost:3400'
 const columns = [
-  {
-    title: 'Avatar',
-    dataIndex: 'avatar',
-    render: (imgAvatar) => <img src={imgAvatar}/>
-  },
   {
     title: 'Nombre de Usuario',
     dataIndex: 'nameUser',
@@ -26,22 +23,28 @@ const columns = [
   {
     title: 'Estado',
     dataIndex: 'state',
+    key:'state',
+    render: (state) => <> 
+    <Switch size="small" defaultChecked />
+    </>
   },
   {
     title: 'Rol',
-    dataIndex: 'role'
+    dataIndex: 'role',
   },
   {
     title: 'Acciones',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <a className='btn btn-outline-danger'>Eliminar</a>
+        <button className='btn btn-outline-danger' onClick={deleteUser} title={record}>Eliminar</button>
+        <a className='btn btn-outline-warning'>Modificar</a>
       </Space>
     ),
   },
 ];
-const URL = 'http://localhost:3400'
+
+
 const [data, setData] = useState([]);
 
 useEffect(function(){
@@ -53,6 +56,9 @@ async function getUsers(){
       const res = await axios.get(URL+'/users');
       const usersDB = res.data.users
       setData(usersDB)
+}
+function deleteUser(e){
+  console.log(e)
 }
   return (
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 export const ModalAdmin = () => {
     const [user, setUser] = useState('');
-
+    const URL = 'http://localhost:3400';
     return (
         <>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userRegister">
@@ -25,10 +25,14 @@ export const ModalAdmin = () => {
                                         mail: ev.target.elements.mail.value,
                                         nameUser:ev.target.elements.nameUser.value,
                                         password: ev.target.elements.password.value,
-                                        password2: ev.target.elements.password2.value,
+                                        age: 20,
+                                        role: 'Cliente',
+                                        state: true
                                     }
                                     setUser(user);
-                                    console.log(user)
+                                    axios.post(`${URL}/user`, user)
+                                                                .then(res => console.log(res))
+                                                                .catch(error => console.log(error))
                                 }}>
                                 <div className='row'>
                                     <div className="mb-3 col-6">
@@ -79,9 +83,6 @@ export const ModalAdmin = () => {
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary" >Registrar</button>
                                 </div>
-                                <p> Usuario 
-                                    {user.nameUser} Registrado Exitosamente
-                                </p>
                             </form>
                         </div>
                     </div>
