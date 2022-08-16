@@ -1,27 +1,15 @@
 import React from 'react'
 import { Button, Form, Input, Row,Col, notification } from 'antd';
-import axios from 'axios';
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 export const Login = () => {
-  const URL = 'http://localhost:3400';
-  const openNotification = (message, description, type) =>{
-    notification[type]({
-      message: message,
-      description: description,
-      placement:'top'
-    })
-  }
+  const auth = useAuth()
+
+
   async function handleSubmitFinish(values){
-    try{
       const loginData = values;
-      console.log(loginData)
-      const response = await axios.post(`${URL}/login`,loginData)
-      console.log(response)
-      openNotification('Login correcto', 'Ha ingresado correctamente', 'succes')
-    } catch(error){
-      console.log(error)
-      openNotification('Login incorrecto', 'No pudo ingresar verificar datos ingresados', 'error')
-    }
+      auth.login(loginData)
   }
   function createUser(){
     
