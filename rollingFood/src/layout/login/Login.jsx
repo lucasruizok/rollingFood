@@ -1,34 +1,87 @@
 import React from 'react'
+import 'antd/dist/antd.css';
+import './login.css';
+import { Button, Checkbox, Form, Input } from 'antd';
 
 export const Login = () => {
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   return (
-    <div className='Login'>
-      <header className='Login-header'>
-        <Form autoComplete="off" labelCol={{ span: 10 }} wrapperCol={{ span: 14 }}>
-          // Input: Email
-          <Form.Item name="email" label="Email" rules={[{
-            required: true,
-            message: "Please enter you email"
-          }]}>
-            <Input placeholder="Type your email" />
+    <div className="container">
+      <div className="img-container">
+        <img src="" />
+      </div>
+      <div className="form-container">
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Email"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: 'Ingresa tu email',
+              },
+            ]}
+          >
+            <Input />
           </Form.Item>
-          // Input: Password
-          <Form.Item name="password" label="Password">
-            <Input.Password placeholder="Type your password" />
+          
+          <Form.Item
+            label="Contraseña"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Ingresa tu contraseña',
+              },
+            ]}
+          >
+            <Input.Password />
           </Form.Item>
-          // Checkbox: Remember Password
-          <Form.Item name="remember" wrapperCol={{ span: 24 }}>
-            <Checkbox>
-              {" "}
-              Remember my password
-            </Checkbox>
+
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Checkbox>Recordarme</Checkbox>
           </Form.Item>
-          // Button: Log In
-          <Form.Item>
-            <Button block type="primary" htmlType="submit">Log In</Button>
+
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Ingresar
+            </Button>
           </Form.Item>
         </Form>
-      </header>
+      </div>
     </div>
-  )
-}
+  );
+};
