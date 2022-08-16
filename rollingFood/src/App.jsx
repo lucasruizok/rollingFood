@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 //componentes Ant Desing
 const { Header, Footer, Content } = Layout;
-import { Layout } from 'antd';
+import {  Layout } from 'antd';
+
 
 //componentes para react route
 import {
