@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Open+Sans&family=Oswald&display=swap');
 nav{
-    background-color: rgb(226, 76, 31);
+    background-color: #e24c1f;
     padding: 0em 1em !important;
     display: flex;
     align-items: center;
@@ -9,8 +9,8 @@ nav{
 .navbarRolling{
     height: 64px;
 }
-img{
-    height: 60px;
+.navbar{
+    z-index: 100;
 }
 .show{
     height: 100vh;

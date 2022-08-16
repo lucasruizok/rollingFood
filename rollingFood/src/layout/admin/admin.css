@@ -5,12 +5,12 @@
     cursor: pointer;
     transition: color 0.3s;
   }
-  
   .trigger:hover {
     color: #1890ff;
   }
-  
-  .site-layout .site-layout-background {
-    background: #fff;
+  .ant-layout-sider-children{
+    background-color: #666;
   }
-  
+  .ant-list-split .ant-list-item:last-child:hover{
+    background-color:#b92e0c;
+  }

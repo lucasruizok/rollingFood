@@ -41,7 +41,12 @@ export const AdminProducts = () => {
       <Table dataSource={products}>
         <Column title="Nombre" dataIndex="name" key="name" />
         <Column title="Categoria" dataIndex="category" key="category" />
-        <Column title="Precio" dataIndex="price" key="price" />
+        <Column title="Precio" dataIndex="price" key="price"
+          render={
+            (price) => <span>
+                    $  {price}
+            </span> 
+          }/>
         <Column title="Detalle" dataIndex="detail" key="detail" />
         <Column
           title="Estado"

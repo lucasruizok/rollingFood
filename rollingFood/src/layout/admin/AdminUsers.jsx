@@ -1,108 +1,72 @@
 import React, { useState } from 'react'
-import { Button, Table, Tag, Space } from 'antd';
+import { Switch, Table, Tag, Space } from 'antd';
 import { ModalAdmin } from './ModalAdmin';
+import axios from 'axios';
+import { useEffect } from 'react';
+
+
+export const AdminUsers = () => {  
+  const URL = 'http://localhost:3400'
 const columns = [
   {
-    title: 'Nombre',
-    dataIndex: 'name',
+    title: 'Nombre de Usuario',
+    dataIndex: 'nameUser',
+  },
+  {
+    title: 'Edad',
+    dataIndex: 'age',
   },
   {
     title: 'Email',
-    dataIndex: 'email',
+    dataIndex: 'mail',
+  },
+  {
+    title: 'Estado',
+    dataIndex: 'state',
+    key:'state',
+    render: (state) => <> 
+    <Switch size="small" defaultChecked />
+    </>
   },
   {
     title: 'Rol',
     dataIndex: 'role',
   },
   {
-    title: 'Estado',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag === 'activo' ? 'green' : 'red';
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
     title: 'Acciones',
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
+        <button className='btn btn-outline-danger' onClick={deleteUser} title={record}>Eliminar</button>
         <a className='btn btn-outline-warning'>Modificar</a>
-        <a className='btn btn-outline-danger'>Eliminar</a>
-        <a className='btn '>Dest</a>
-      </Space>  
+      </Space>
     ),
   },
 ];
-const data = [];
 
-for (let i = 0; i < 6; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    email: 'lucas@gmail.com',
-    role: `Administrador`,
-    tags: ['activo'],
-  });
+
+const [data, setData] = useState([]);
+
+useEffect(function(){
+  console.log('useEfect funcionando');
+  getUsers()
+},[])
+
+async function getUsers(){
+      const res = await axios.get(URL+'/users');
+      const usersDB = res.data.users
+      setData(usersDB)
 }
-
-export const AdminUsers = () => {
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const start = () => {
-    setLoading(true); // ajax request after empty completing
-
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
-  };
-
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
-  const hasSelected = selectedRowKeys.length > 0;
-
+function deleteUser(e){
+  console.log(e)
+}
   return (
 
     <div className='container'>
-      <h1 className='text-center'>ADMINISTRAR USUARIOS</h1>
-      <div
-        style={{
-          marginBottom: 16,
-        }}
-        >
-        <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-          Reload
-        </Button>
-        <span
-          style={{
-            marginLeft: 8,
-          }}
-        >
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-        </span>
-      </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
-            {/* MODAL */}
-          
+      <h4>LISTA DE USUARIOS</h4>
+      <ModalAdmin/>
+      <hr />
+      <Table columns={columns} dataSource={data} size="middle" />
     </div>
   )
 }

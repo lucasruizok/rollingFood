@@ -1,7 +1,7 @@
 import React from 'react'
-import 'antd/dist/antd.css';
-import './login.css';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input, Row,Col, notification } from 'antd';
+import { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 export const Login = () => {
   const onFinish = (values) => {
@@ -12,76 +12,54 @@ export const Login = () => {
     console.log('Failed:', errorInfo);
   };
 
+  const auth = useAuth()
+
+
+  async function handleSubmitFinish(values){
+      const loginData = values;
+      auth.login(loginData)
+  }
+  function createUser(){
+    
+  } 
+
   return (
-    <div className="container">
-      <div className="img-container">
-        <img src="" />
-      </div>
-      <div className="form-container">
-        <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Email"
-            name="username"
+    <>
+    <Row justify='center' className='p-lg pt-5'>
+      <Col span={16}>
+        <h2 className='text-center'>INICIAR SESION</h2>
+      <Form labelCol={{span: 8}} wrapperCol={{span: 12}} onFinish={handleSubmitFinish}>
+        <Form.Item
+            label='Email'
+            name='mail'
             rules={[
-              {
-                required: true,
-                message: 'Ingresa tu email',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          
-          <Form.Item
-            label="Contraseña"
-            name="password"
+            { required: true, message: 'Por favor introducir email' },
+            { type: 'email', message: 'el correo debe ser valido'}
+            ]}>
+          <Input type='email' minLength={3}/>
+        </Form.Item>
+        <Form.Item
+            label='Contraseña'
+            name='password'
             rules={[
-              {
-                required: true,
-                message: 'Ingresa tu contraseña',
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
+              {required: true, message:'Por favor introducir contraseña'},
+              {type:'password'},
+              {min: 4, message:'Este campo necesita minimo de 4 caracteres'}
+            ]}>
+          <Input type='password' minLength={4} maxLength={12}/>
+        </Form.Item>
+        <Form.Item wrapperCol={{ offset: 12, span: 12}}>
+        <Button type="primary" danger onClick={createUser} htmlType="submit" className='mx-5'>
+          Registrarse
+        </Button>
+        <Button type="primary" htmlType="submit">
+          Ingresar
+        </Button>
+      </Form.Item>
+      </Form>
+      </Col>
+    </Row>
 
-          <Form.Item
-            name="remember"
-            valuePropName="checked"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Checkbox>Recordarme</Checkbox>
-          </Form.Item>
-
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button type="primary" htmlType="submit">
-              Ingresar
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </div>
-  );
-};
+    </>
+  )
+}

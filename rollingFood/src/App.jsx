@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 //componentes Ant Desing
 const { Header, Footer, Content } = Layout;
-import { Layout } from 'antd';
+import {  Layout } from 'antd';
+
 
 //componentes para react route
 import {
@@ -26,59 +28,62 @@ import { AdminUsers } from './layout/admin/AdminUsers';
 import { AdminProducts } from './layout/admin/AdminProducts';
 import { AdminOrders } from './layout/admin/AdminOrders';
 import { PrivateRoutes } from './routes/PrivateRoutes';
+import { AuthProvider } from './context/AuthContext';
 // Componente principal
 function App() {
 
       return (
-            <>
-                  <Layout>
-                        <Header>
-                              <Navbar></Navbar>
-                        </Header>
-                        <Content>
-                              <Routes>
-                                    <Route
-                                          path='/'
-                                          element={<Main />} />
-                                    <Route
-                                          path='menu'
-                                          element={<Menu />} />
-                                    <Route
-                                          path='pedidos'
-                                          element={<Pedidos />} />
-                                    <Route
-                                          path='about'
-                                          element={<About />} />
-                                    <Route
-                                          path='login'
-                                          element={<Login />} />
-                                    <Route
-                                          path='register'
-                                          element={<Register />} />
-                                    <Route
-                                          path='admin'
-                                          element={<PrivateRoutes><Admin /></PrivateRoutes>}>
+            <AuthProvider>
+                  <>
+                        <Layout>
+                              <Header>
+                                    <Navbar></Navbar>
+                              </Header>
+                              <Content>
+                                    <Routes>
                                           <Route
-                                                path='users'
-                                                element={<AdminUsers />} />
+                                                path='/'
+                                                element={<Main />} />
                                           <Route
-                                                path='products'
-                                                element={<AdminProducts />} />
+                                                path='menu'
+                                                element={<Menu />} />
                                           <Route
-                                                path='orders'
-                                                element={<AdminOrders />} />
+                                                path='pedidos'
+                                                element={<PrivateRoutes><Pedidos /></PrivateRoutes>} />
+                                          <Route
+                                                path='about'
+                                                element={<About />} />
+                                          <Route
+                                                path='login'
+                                                element={<Login />} />
+                                          <Route
+                                                path='register'
+                                                element={<Register />} />
+                                          <Route
+                                                path='admin'
+                                                element={<PrivateRoutes><Admin /></PrivateRoutes>}>
+                                                <Route
+                                                      path='users'
+                                                      element={<AdminUsers />} />
+                                                <Route
+                                                      path='products'
+                                                      element={<AdminProducts />} />
+                                                <Route
+                                                      path='orders'
+                                                      element={<AdminOrders />} />
 
-                                    </Route>
-                                    <Route
-                                          path='*'
-                                          element={<Error404 />} />
-                              </Routes>
-                        </Content>
-                        <Footer>
-                              <FooterRolling></FooterRolling>
-                        </Footer>
-                  </Layout>
-            </>
+                                          </Route>
+                                          <Route
+                                                path='*'
+                                                element={<Error404 />} />
+                                    </Routes>
+                              </Content>
+                              <Footer>
+                                    <FooterRolling></FooterRolling>
+                              </Footer>
+                        </Layout>
+                  </>
+            </AuthProvider>
       )
 }
 
