@@ -71,7 +71,6 @@ function App() {
                                                 <Route
                                                       path='orders'
                                                       element={<AdminOrders />} />
-
                                           </Route>
                                           <Route
                                                 path='*'
