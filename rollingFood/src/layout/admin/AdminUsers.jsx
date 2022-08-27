@@ -43,8 +43,6 @@ const columns = [
     ),
   },
 ];
-
-
 const [data, setData] = useState([]);
 
 useEffect(function(){
