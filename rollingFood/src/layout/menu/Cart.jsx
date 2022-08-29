@@ -14,9 +14,14 @@ export const Cart = () => {
       handlePrice();
     }
   };
-  const handleChange = () =>{
-    
-  }
+  const handleChange = (item, d) => {
+    const index = cart.indexOf(item);
+    const pizza = cart;
+    arr[index].amount += d;
+
+    if (pizza[index].amount === 0) pizza[index].amount = 1;
+    setCart([...pizza]);
+  };
   const handlePrice = () => {
     let ans = 0;
     cart.map((item) => (ans += item.amount * item.price));
