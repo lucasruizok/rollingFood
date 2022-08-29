@@ -1,17 +1,18 @@
-import { useState } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { notification } from 'antd';
+import cards from "./Data";
 
-const URL = 'http://localhost:3400';
-const AuthContext = createContext();
+export const DataContext = createContext();
+export const DataProvider = ({ children }) => {
+    const URL = 'http://localhost:3400';
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    const [token, setToken] = useState(localStorage.getItem('token'));
+    const [pizzas, setPizzas] = useState([]);
+    const [cart, setCart] = useState([]);
+    const navigate = useNavigate();
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-    const [token, setToken] = useState(localStorage.getItem('token'))
-    const navigate = useNavigate()
     const openNotification = (message, description, type) => {
         notification[type]({
             message: message,
@@ -45,15 +46,41 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token')
         navigate('/login')
     }
-    const auth = {
+    useEffect(()=>{
+        const product = cards.items;
+        if(product){
+            setPizzas(product);
+        }else{
+            setPizzas([])
+        }
+    },[])
+    const addCart = (id) =>{
+        const check = cart.every(item => item.id !== id);
+        if(check){
+            const data = pizzas.filter(pizza => pizza.id === id);
+            setCart([...cart, ...data]);
+            localStorage.setItem('dataCart', JSON.stringify(data));
+        } else{
+            alert('La pizza que quiere agregar ya se encuentra dentro del carrito');
+        }
+    }
+    useEffect(() =>{
+        const dataCart = JSON.parse(localStorage.getItem('dataCart'));
+        if(dataCart){
+            setCart(dataCart);
+        }
+    },[])
+
+    const data = {
         user,
         token,
         login,
-        logout
+        logout,
+        pizzas,
+        cart,
+        setCart,
+        addCart
     }
-    return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
-}
 
-export const useAuth = () => {
-    return useContext(AuthContext)
+    return <DataContext.Provider value={data}>{children}</DataContext.Provider>
 }

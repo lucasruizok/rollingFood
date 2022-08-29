@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button, Form, Input, Row,Col, notification } from 'antd';
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { Button, Form, Input, Row,Col } from 'antd';
+import { DataContext } from '../../context/DataContext';
+import { useContext } from 'react';
 
 export const Login = () => {
   const onFinish = (values) => {
@@ -11,13 +11,10 @@ export const Login = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
-  const auth = useAuth()
-
-
   async function handleSubmitFinish(values){
       const loginData = values;
-      auth.login(loginData)
+      data = useContext(DataContext);
+      data.login(loginData);
   }
   function createUser(){
     

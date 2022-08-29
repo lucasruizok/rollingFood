@@ -15,7 +15,7 @@
 .card{
     font-family:Arial, Helvetica, sans-serif ;
     animation: backInLeft;
-    animation-duration: 2s; 
+    animation-duration: 1.5s; 
 }
 .title{
     font-size: 3em;

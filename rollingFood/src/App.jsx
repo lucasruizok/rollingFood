@@ -28,12 +28,12 @@ import { AdminUsers } from './layout/admin/AdminUsers';
 import { AdminProducts } from './layout/admin/AdminProducts';
 import { AdminOrders } from './layout/admin/AdminOrders';
 import { PrivateRoutes } from './routes/PrivateRoutes';
-import { AuthProvider } from './context/AuthContext';
+import { DataProvider } from './context/DataContext';
 // Componente principal
 function App() {
 
       return (
-            <AuthProvider>
+            <DataProvider>
                   <>
                         <Layout>
                               <Header>
@@ -82,7 +82,7 @@ function App() {
                               </Footer>
                         </Layout>
                   </>
-            </AuthProvider>
+            </DataProvider>
       )
 }
 

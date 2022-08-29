@@ -2,9 +2,13 @@ import React from "react";
 import "./card.css";
 import "../../index.css";
 import 'animate.css';
+import { useContext } from "react";
+import { DataContext } from "../../context/DataContext";
+import { ButtonCard } from "../buttons/ButtonCard";
 
-export const Card = ({ item, handleClick }) => {
-  const { title, desc, price, image, id } = item;
+export const Card = ({item}) => {
+  const { title, desc, price, image, id} = item;
+  const {addCart} = useContext(DataContext);
   return (
     <div className="card shadow p-3 mb-4 bg-body rounded">
       <div className="row g-0 mt-1">
@@ -20,9 +24,7 @@ export const Card = ({ item, handleClick }) => {
               <p className="price">${price}</p>
               <p className="description">{desc}</p>
             </div>
-            <div className="content mb-1">
-              <button className="btn btn-rolling" onClick={() => handleClick(item)}>Añadir a mi carrito</button>
-            </div>
+            <ButtonCard addCart={addCart} id={id}/>
           </div>
         </div>
       </div>
