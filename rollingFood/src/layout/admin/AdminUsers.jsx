@@ -3,10 +3,10 @@ import { Switch, Table, Tag, Space } from 'antd';
 import { ModalAdmin } from './ModalAdmin';
 import axios from 'axios';
 import { useEffect } from 'react';
+import URL from '../../constGlobals';
 
 
-export const AdminUsers = () => {  
-  const URL = 'http://localhost:3400'
+export const AdminUsers = () => { 
 const columns = [
   {
     title: 'Nombre de Usuario',

@@ -14,3 +14,9 @@
   .ant-list-split .ant-list-item:last-child:hover{
     background-color:#b92e0c;
   }
+  .sideBarItem{
+    color: #fff;
+  }
+  .ant-list-item-meta-title{
+    color: #fff;
+  }

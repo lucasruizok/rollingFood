@@ -1,71 +1,67 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Table, Tag } from 'antd';
+import URL from '../../constGlobals';
+import axios from 'axios';
+
 export const AdminProducts = () => {
-  const productsList = [
+  const [pizzas, setPizzas] = useState([]);
+  const columns = [
     {
-      name: 'lucas',
-      state: ['activo'],
-      price: 2,
-      detail:'ssdaa',
-      category: 'hola'
+      title: 'Pizza',
+      dataIndex: 'nombre',
+      key: 'nombre',
+      render: (text) => <a>{text}</a>,
     },
     {
-      name: 'lucas',
-      state: ['activo'],
-      price: 2,
-      detail:'ssdaa',
-      category: 'hola'
+      title: 'Categoria',
+      dataIndex: 'categoria',
+      key: 'categoria',
     },
     {
-      name: 'lucas',
-      state: ['activo'],
-      price: 2,
-      detail:'ssdaa',
-      category: 'hola'
+      title: 'Detalle',
+      dataIndex: 'detalle',
+      key: 'detalle',
+    },
+    {
+      title: 'Precio',
+      dataIndex: 'precio',
+      key: 'precio',
+      render: (precio) => (<span> $ {precio}</span>)
+    },
+    {
+      title: 'Estado',
+      dataIndex: 'estado',
+      key: 'estado',
+      render: (estado) => ( estado === true? <span>Activo</span> : <span>Pasivo</span>)
+    },
+    {
+      title: 'Acciones',
+      key: 'action',
+      render: (_, record) => (
+        <Space size="middle">
+          <button>Modificar</button>
+          <button>Eliminar</button>
+        </Space>
+      ),
     },
   ];
-  const [products, setProducts] = useState([]);
   useEffect(
     function () {
-      console.log('useEffect in adminProducts');
-      setProducts(productsList);
+      getPizzas();
     },
     []
   )
-  const { Column } = Table;
-
+  async function getPizzas() {
+    const res = await axios.get(URL + '/products');
+    const pizzasList = res.data.productosEncontrados;
+    setPizzas(pizzasList)
+  }
+  console.log(pizzas)
   return (
     <>
       <h1 className='text-center'>ADMINISTRADOR DE PRODUCTOS</h1>
       <hr />
-      <Table dataSource={products}>
-        <Column title="Nombre" dataIndex="name" key="name" />
-        <Column title="Categoria" dataIndex="category" key="category" />
-        <Column title="Precio" dataIndex="price" key="price"
-          render={
-            (price) => <span>
-                    $  {price}
-            </span> 
-          }/>
-        <Column title="Detalle" dataIndex="detail" key="detail" />
-        <Column
-          title="Estado"
-          dataIndex="state"
-          key="state"
-          render={(state) => (
-            <>
-              {state.map((state) =>{ 
-                let color = state === 'activo' ? 'green' : 'red'
-                return (          
-                <Tag color={color} key={state}>
-                  {state.toUpperCase()}
-                </Tag>
-              )}
-              )}
-            </>
-          )}
-        />
-      </Table>
+      <Table columns={columns} dataSource={pizzas} />
     </>
   )
 }

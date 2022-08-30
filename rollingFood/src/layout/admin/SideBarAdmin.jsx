@@ -37,7 +37,7 @@ export const SideBarAdmin = () => {
                             style={({ isActive }) =>
                             isActive ? activeStyle : undefined
                           }>
-                        <List.Item>
+                        <List.Item className='sideBarItem'>
                             <i className={item.class + ' px-3'}></i>
                             <List.Item.Meta
                                 title={item.title} />
