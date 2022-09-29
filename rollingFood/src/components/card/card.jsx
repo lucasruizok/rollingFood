@@ -7,27 +7,27 @@ import { DataContext } from "../../context/DataContext";
 import { ButtonCard } from "../buttons/ButtonCard";
 
 export const Card = ({item}) => {
-  const { title, desc, price, image, id} = item;
+  const { categoria, descuento, detalle, nombre, precio, _id, imgUrl} = item;
   const {addCart} = useContext(DataContext);
   return (
     <div className="card shadow p-3 mb-4 bg-body rounded">
       <div className="row g-0 mt-1">
         <div className="col-4 d-flex justify-content-center">
-          <img src={image} className="img-fluid rounded-start img-card" />
+          <img src={imgUrl} className="img-fluid rounded-start img-card" />
         </div>
         <div className="col-8">
           <div className="card-body-rolling">
             <div className="content">
-              <h5 className="mt-2 title">{title}</h5>
+              <h5 className="mt-2 title">{nombre}</h5>
             </div>
             <div className="content">
-              <p className="price">${price}</p>
-              <p className="description">{desc}</p>
+              <p className="price">Precio ${precio - descuento}</p>
+              <p className="description">Ingredientes: {detalle}</p>
             </div>
-            <ButtonCard addCart={addCart} id={id}/>
+            <ButtonCard addCart={addCart} _id={_id}/>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   );
 }

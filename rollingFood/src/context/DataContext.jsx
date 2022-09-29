@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { notification } from 'antd';
-import cards from "./Data";
+import { deleteProduct, getProducts } from "../services/api";
 
 export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
@@ -20,11 +20,10 @@ export const DataProvider = ({ children }) => {
             placement: 'top'
         })
     }
+
     const login = async (formData) => {
         try {
-            console.log('Funcion login es correcta')
             const response = await axios.post(`${URL}/login`, formData)
-            console.log(response)
             const tokenLogin = response.data.token
             const userLogin = response.data.usuario
             setUser(userLogin)
@@ -32,38 +31,31 @@ export const DataProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(userLogin));
             localStorage.setItem('token', tokenLogin);
             openNotification('Login correcto', 'Ha ingresado correctamente', 'success')
-            setTimeout(() => { navigate('/') }, 1000)
+            setTimeout(() => { navigate('/menu') }, 1000)
         } catch (error) {
-            console.log('error', error)
             openNotification('Login incorrecto', 'No pudo ingresar verificar datos ingresados', 'error')
         }
     }
+
     const logout = () => {
-        console.log('Funcion LOGOUT es correcta')
         setUser(null)
         setToken(null)
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         navigate('/login')
     }
-    useEffect(()=>{
-        const product = cards.items;
-        if(product){
-            setPizzas(product);
-        }else{
-            setPizzas([])
-        }
-    },[])
-    const addCart = (id) =>{
-        const check = cart.every(item => item.id !== id);
-        if(check){
-            const data = pizzas.filter(pizza => pizza.id === id);
+
+    const addCart = (id) => {
+        const check = cart.every(item => item._id !== id);
+        if (check) {
+            const data = pizzas.filter(pizza => pizza._id === id);
             setCart([...cart, ...data]);
-            localStorage.setItem('dataCart', JSON.stringify(data));
-        } else{
+            localStorage.setItem('dataCart', JSON.stringify([...cart, ...data]));
+        } else {
             alert('La pizza que quiere agregar ya se encuentra dentro del carrito');
         }
     }
+
     useEffect(() =>{
         const dataCart = JSON.parse(localStorage.getItem('dataCart'));
         if(dataCart){
@@ -71,15 +63,37 @@ export const DataProvider = ({ children }) => {
         }
     },[])
 
+    useEffect(() => {
+        getPizzas();
+    }, []);
+
+    const getPizzas =  () => {
+        getProducts().then((resp) => {
+            const pizzasArray = resp.productosEncontrados;
+            setPizzas(pizzasArray)
+        })
+    };
+
+    const handleDeletePizza = (id) =>{
+        const proced = window.confirm("Estas seguro que quieres eliminar esta tarea?");
+        if(proced){
+            deleteProduct(id);
+            getPizzas();            
+        }
+      };
+
     const data = {
         user,
         token,
         login,
         logout,
         pizzas,
+        setPizzas,
         cart,
         setCart,
-        addCart
+        addCart,
+        handleDeletePizza,
+        getPizzas
     }
 
     return <DataContext.Provider value={data}>{children}</DataContext.Provider>

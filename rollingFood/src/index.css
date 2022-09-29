@@ -11,3 +11,7 @@
     background-color: #852e14;
     color: #ffffff;
   }
+.text-area-form{
+    height: 4em;
+    resize: none;
+}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import URL from '../../constGlobals';
 export const ModalAdmin = () => {
     const [user, setUser] = useState('');
-    const URL = 'http://localhost:3400';
     return (
         <>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userRegister">

@@ -4,7 +4,7 @@ import { Card } from '../../components/card/card';
 import { DataContext } from '../../context/DataContext';
 
 export const Menu = () => {
-  const {pizzas} = useContext(DataContext)
+  const {pizzas} = useContext(DataContext);
 
   return (
     <div className='container'>

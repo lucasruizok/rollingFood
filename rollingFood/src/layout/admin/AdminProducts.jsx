@@ -1,16 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Space, Table, Tag } from 'antd';
-import URL from '../../constGlobals';
-import axios from 'axios';
+import React, { useContext } from 'react'
+import { Space, Table } from 'antd';
+import { ModalAddProduct } from '../../components/modalAddProduct/ModalAddProduct';
+import { ModalEditProduct } from '../../components/modalEditProduct/ModalEditProduct';
+import { DataContext } from '../../context/DataContext';
 
 export const AdminProducts = () => {
-  const [pizzas, setPizzas] = useState([]);
+
+  const {pizzas, handleDeletePizza} = useContext(DataContext)
   const columns = [
+    {
+      title: 'Imagen',
+      dataIndex: 'imgUrl',
+      key: 'imagen',
+      render: (urlImg) => <img src={urlImg} width={50} height={50}/>,
+    },
     {
       title: 'Pizza',
       dataIndex: 'nombre',
       key: 'nombre',
-      render: (text) => <a>{text}</a>,
+      render: (text) => <span>{text}</span>,
     },
     {
       title: 'Categoria',
@@ -32,35 +40,24 @@ export const AdminProducts = () => {
       title: 'Estado',
       dataIndex: 'estado',
       key: 'estado',
-      render: (estado) => ( estado === true? <span>Activo</span> : <span>Pasivo</span>)
+      render: (estado) => (estado === true ? <span>Activo</span> : <span>Pasivo</span>)
     },
     {
       title: 'Acciones',
       key: 'action',
-      render: (_, record) => (
+      render: (pizza) => (
         <Space size="middle">
-          <button>Modificar</button>
-          <button>Eliminar</button>
+          <ModalEditProduct idProduct={pizza._id}/>
+          <button onClick={()=> handleDeletePizza(pizza._id)} className='btn btn-danger'>Eliminar</button>
         </Space>
       ),
     },
   ];
-  useEffect(
-    function () {
-      getPizzas();
-    },
-    []
-  )
-  async function getPizzas() {
-    const res = await axios.get(URL + '/products');
-    const pizzasList = res.data.productosEncontrados;
-    setPizzas(pizzasList)
-  }
-  console.log(pizzas)
+
   return (
     <>
-      <h1 className='text-center'>ADMINISTRADOR DE PRODUCTOS</h1>
-      <hr />
+      <h1 className='text-center p-0 m-0'>ADMINISTRADOR DE PRODUCTOS</h1>
+      <ModalAddProduct />
       <Table columns={columns} dataSource={pizzas} />
     </>
   )

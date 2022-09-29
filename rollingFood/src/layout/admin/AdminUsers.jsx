@@ -4,6 +4,7 @@ import { ModalAdmin } from './ModalAdmin';
 import axios from 'axios';
 import { useEffect } from 'react';
 import URL from '../../constGlobals';
+import { deleteUser } from '../../services/api';
 
 
 export const AdminUsers = () => { 
@@ -24,9 +25,15 @@ const columns = [
     title: 'Estado',
     dataIndex: 'state',
     key:'state',
-    render: (state) => <> 
-    <Switch size="small" defaultChecked />
-    </>
+    render: (_, user) => 
+    (
+    user.state ? <div>
+    <Switch size="small" onClick={()=> handleStatus(user)} checked='true'/> <span>Activo</span>
+    </div>: 
+    <div>
+    <Switch size="small" onClick={()=> handleStatus(user)} /> <a> INACTIVO</a>
+    </div>
+    )
   },
   {
     title: 'Rol',
@@ -35,9 +42,9 @@ const columns = [
   {
     title: 'Acciones',
     key: 'action',
-    render: (_, record) => (
+    render: (_, user) => (
       <Space size="middle">
-        <button className='btn btn-outline-danger' onClick={deleteUser} title={record}>Eliminar</button>
+        <button className='btn btn-outline-danger' onClick={()=> handleDeleteUser(user)}>Eliminar</button>
         <a className='btn btn-outline-warning'>Modificar</a>
       </Space>
     ),
@@ -46,17 +53,23 @@ const columns = [
 const [data, setData] = useState([]);
 
 useEffect(function(){
-  console.log('useEfect funcionando');
   getUsers()
 },[])
+
+const handleStatus = (user) =>{
+    const newUsers = [...data];
+    const newUser = newUsers.find((userDb)=> {return userDb._id === user._id});
+    newUser.state = !newUser.state;
+    setData(newUsers);
+}
 
 async function getUsers(){
       const res = await axios.get(URL+'/users');
       const usersDB = res.data.users
       setData(usersDB)
 }
-function deleteUser(e){
-  console.log(e)
+function handleDeleteUser(user){
+  deleteUser(user._id);
 }
   return (
 

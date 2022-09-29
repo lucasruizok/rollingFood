@@ -6,22 +6,26 @@ import { DataContext } from '../../context/DataContext';
 
 export const Navbar = () => {
     const links = [
+        // {
+        //     key:1,
+        //     title: 'Inicio',
+        //     path: '/',
+        //     protected: false
+        // },
         {
-            title: 'Inicio',
-            path: '/',
-            protected: false
-        },
-        {
+            key: 2,
             title: 'Menu',
             path: 'menu',
             protected: false
         },
         {
+            key: 3,
             title: 'Conocenos',
             path: 'about',
             protected: false
         },
         {
+            key: 4,
             title: 'Administrador',
             path: 'admin',
             protected: true
@@ -30,8 +34,9 @@ export const Navbar = () => {
     let activeStyle = {
         textDecoration: "underline",
     };
-    const {cart, user} = useContext(DataContext);
+    const { cart, user, logout } = useContext(DataContext);
     const currentUser = user;
+
     function collapsenavbar() {
         const navbar = document.getElementById('navbarNavDropdown');
         navbar.classList.remove('show');
@@ -57,7 +62,7 @@ export const Navbar = () => {
                                 return (
                                     link.protected && !currentUser ? '' :
 
-                                        <li className='nav-item'>
+                                        <li className='nav-item' key={link.key}>
                                             <NavLink
                                                 onClick={() => collapsenavbar()}
                                                 to={link.path}
@@ -74,32 +79,36 @@ export const Navbar = () => {
                         }
 
                     </ul>
-                    {!currentUser ? '':
-                    <>
-                    <div className='cart-pedidos'>
-                    <NavLink
-                        onClick={() => collapsenavbar()}
-                        to='pedidos'
-                        style={({ isActive }) =>
-                            isActive ? activeStyle : undefined
-                        }
-                        className='nav-link cart-navbar'
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    {!currentUser ? '' :
+                        <>
+                            <div className='cart-pedidos'>
+                                <NavLink
+                                    onClick={() => collapsenavbar()}
+                                    to='pedidos'
+                                    style={({ isActive }) =>
+                                        isActive ? activeStyle : undefined
+                                    }
+                                    className='nav-link cart-navbar'
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
 
-                  </svg></NavLink>
-                    <span className='item-total-pedidos'>{cart.length}</span>
-                    </div>
-                    </>
+                                    </svg></NavLink>
+                                <span className='item-total-pedidos'>{cart.length}</span>
+                            </div>
+                        </>
                     }
                 </div>
-                <h4>{user?.nameUser ?? ''}</h4>
                 {
-                    user ?
+                    currentUser?.nameUser ?
+                        <h5 className='m-0'>Bienvenido {currentUser?.nameUser}</h5>
+                        : ''
+                }
+                {
+                    currentUser ?
                         <NavLink to='login'
                             className='nav-link btn btn-dark p-2 mx-2 btnLogin'
-                            onClick={() => data.logout()}>
+                            onClick={() => logout()}>
                             SALIR
                         </NavLink>
                         :

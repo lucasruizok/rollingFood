@@ -43,7 +43,7 @@ function App() {
                                     <Routes>
                                           <Route
                                                 path='/'
-                                                element={<Main />} />
+                                                element={<Menu />} />
                                           <Route
                                                 path='menu'
                                                 element={<Menu />} />
