@@ -12,7 +12,7 @@ export const Card = ({ item }) => {
   return (
     <div className="card shadow p-3 mb-4 bg-body rounded">
       <div className="row g-0 mt-1">
-        <div className="col-4 d-flex justify-content-center">
+        <div className="col-4 img-container">
           <img src={imgUrl} className="img-card" />
         </div>
         <div className="col-8">

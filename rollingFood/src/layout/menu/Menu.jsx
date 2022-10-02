@@ -9,15 +9,14 @@ export const Menu = () => {
   return (
     <div className='container'>
       <h2 className='text-center mt-2'>Nuestras Pizzas</h2>
-      <div>
+
         <div className="row">
           {pizzas.map((item) => (
-            <div className="col-6">
+            <div className="col-lg-6">
               <Card item={item} />
             </div>
           ))}
         </div>
-      </div>
     </div>
   )
 }

@@ -1,8 +1,14 @@
 .img-card{
     object-fit: cover;
     max-height: 15em;
-    max-width: 15em;
+    max-width: 14em;
     border-radius: 50%;
+    
+}
+.img-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .card-body-rolling{
     display: flex;
