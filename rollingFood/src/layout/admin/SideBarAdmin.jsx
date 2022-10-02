@@ -24,19 +24,18 @@ export const SideBarAdmin = () => {
     ];
     let activeStyle = {
         textDecoration: "underline",
-      };
+    };
     return (
         <>
             <List
-
                 itemLayout="horizontal"
                 dataSource={data}
                 renderItem={(item) => (
-                    <NavLink   to={item.path ?? '/'}
-                            className='elementSideBar'
-                            style={({ isActive }) =>
+                    <NavLink to={item.path ?? '/'}
+                        className='elementSideBar'
+                        style={({ isActive }) =>
                             isActive ? activeStyle : undefined
-                          }>
+                        }>
                         <List.Item className='sideBarItem'>
                             <i className={item.class + ' px-3'}></i>
                             <List.Item.Meta

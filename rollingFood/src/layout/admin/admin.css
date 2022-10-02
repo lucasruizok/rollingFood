@@ -20,3 +20,6 @@
   .ant-list-item-meta-title{
     color: #fff;
   }
+  .siderAdmin{
+    min-height: calc(100vh - 188px);
+  }

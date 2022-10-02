@@ -125,9 +125,10 @@ export const ModalAddProduct = () => {
                       onChange={handleInputChange}
                       className='form-select'>
                       <option value="" selected>Seleccionar Categoria</option>
-                      <option value="cat1">CATEGORIA 1</option>
-                      <option value="cat2">CATEGORIA 2</option>
-                      <option value="cat3">CATEGORIA 3</option>
+                      <option value="Tradicionales">Tradicionales</option>
+                      <option value="Especiales">Especiales</option>
+                      <option value="Vegetarianas">Vegetarianas</option>
+                      <option value="Calzones">Calzones</option>
                     </select>
                   </div>
                 </div>

@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './admin.css';
 import {
   Routes,
   Route,
 } from "react-router-dom";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 
-//PAGES
+//Pages
 import { SideBarAdmin } from './SideBarAdmin';
 import { AdminUsers } from './AdminUsers';
 import { AdminProducts } from './AdminProducts';
@@ -19,14 +14,13 @@ import { AdminOrders } from './AdminOrders';
 
 
 export const Admin = () => {
-  const { Header, Content, Sider } = Layout;
-  const [collapsed, setCollapsed] = useState(false);
+  const { Content, Sider } = Layout;
 
   return (
     <div>
       <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <SideBarAdmin/>
+        <Sider className='siderAdmin'>
+          <SideBarAdmin />
         </Sider>
         <Layout className="site-layout">
           <Content
@@ -40,13 +34,13 @@ export const Admin = () => {
             <Routes>
               <Route
                 path='users'
-                element={<AdminUsers/>} />
+                element={<AdminUsers />} />
               <Route
                 path='products'
-                element={<AdminProducts/>} />
+                element={<AdminProducts />} />
               <Route
                 path='orders'
-                element={<AdminOrders/>} />
+                element={<AdminOrders />} />
             </Routes>
           </Content>
         </Layout>

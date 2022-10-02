@@ -1,6 +1,5 @@
 import React from "react";
-import { Cart } from "../menu/Cart";
-import "../menu/cart.css"
+import { Cart } from "../../components/cart/Cart";
 import "./pedidos.css"
 
 export const Pedidos = () => {

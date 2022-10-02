@@ -10,6 +10,9 @@ ul{
     background-color: #666;
     color: #faebd7;
     font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
 }
 .ant-layout-footer{
     padding: 0cm;

@@ -25,7 +25,6 @@ export const Cart = () => {
   const handlePrice = () => {
     let ans = 0;
     cart.map((item) => {
-      item.amount=1;
       ans += item.amount * item.precio});
     setPrice(ans);
   };

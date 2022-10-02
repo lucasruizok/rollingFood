@@ -1,7 +1,8 @@
 .img-card{
-    height: 100%;
-    object-fit: contain;
-    max-height: 20em;
+    object-fit: cover;
+    max-height: 15em;
+    max-width: 15em;
+    border-radius: 50%;
 }
 .card-body-rolling{
     display: flex;

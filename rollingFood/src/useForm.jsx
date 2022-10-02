@@ -32,9 +32,7 @@ const useForm = (initialState = {}, onSubmit) => {
         if (Object.keys(errors).length > 0) {
             alert('errores: ' + JSON.stringify(errors))
         } else {
-            setFormData({...formData, imgUrl: inputFileRef.current.files[0]})
             onSubmit?.(formData);
-            console.log(formData)
         }
     }
 

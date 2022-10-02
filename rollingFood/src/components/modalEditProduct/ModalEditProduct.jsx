@@ -9,6 +9,8 @@ export const ModalEditProduct = ({ idProduct }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     let initialState = {};
     const { getPizzas } = useContext(DataContext);
+    const colInput = 'col-9'
+    const colLabel = 'col-3'
 
     const getProductId = () => {
         getProductById(idProduct)
@@ -69,60 +71,79 @@ export const ModalEditProduct = ({ idProduct }) => {
                         <Button htmlType='submit' onClick={handleSubmit}>Modificar Pizza</Button>
                     </Form.Item>
                 ]}>
-                <div className="container">
+                <div>
                     <div className="row">
                         <div className="col-12">
-
-                            <h5 className='text-center'>Modificar Pizza</h5>
-                            <form onSubmit={handleSubmit}>
-                                <div>
-                                    <label htmlFor="name">Pizza</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={name}
-                                        onChange={handleInputChange}
-                                        maxLength={20}
-                                    />
+                            <h5 className='text-center mb-3'>Agregar Pizza</h5>
+                            <form onSubmit={handleSubmit} encType='multipart/form-data'>
+                                
+                                <div className='row mb-3'>
+                                    <label htmlFor="name" className={colLabel}>Pizza</label>
+                                    <div className={colInput}>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={name}
+                                            onChange={handleInputChange}
+                                            maxLength={20}
+                                            className='form-control'
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    <label htmlFor="price">Precio: $</label>
-                                    <input
-                                        type="number"
-                                        name="price"
-                                        value={price}
-                                        onChange={handleInputChange}
-                                        maxLength={4}
-                                    />
+                                <div className="row mb-3">
+                                    <label htmlFor="price" className={colLabel}>Precio: $</label>
+                                    <div className={colInput}>
+                                        <input
+                                            type="number"
+                                            name="price"
+                                            value={price}
+                                            onChange={handleInputChange}
+                                            maxLength={4}
+                                            className='form-control'
+                                        />
+                                    </div>
                                 </div>
-                                <div>
-                                    <label htmlFor="discount">Descuento: $</label>
-                                    <input
-                                        type="number"
-                                        name="discount"
-                                        value={discount}
-                                        onChange={handleInputChange}
-                                        maxLength={4}
-                                    />
+                                <div className="row mb-3">
+                                    <label htmlFor="discount" className={colLabel}>Descuento: $</label>
+                                    <div className={colInput}>
+                                        <input
+                                            type="number"
+                                            name="discount"
+                                            value={discount}
+                                            onChange={handleInputChange}
+                                            maxLength={4}
+                                            className='form-control'
+                                        />
+                                    </div>
                                 </div>
-                                <select
-                                    name="category"
-                                    value={category}
-                                    onChange={handleInputChange}>
-                                    <option value="" selected>Seleccionar Categoria</option>
-                                    <option value="cat1">CATEGORIA 1</option>
-                                    <option value="cat2">CATEGORIA 2</option>
-                                    <option value="cat3">CATEGORIA 3</option>
-                                </select>
-                                <div>
-                                    <label htmlFor="detail">Detalle:</label>
-                                    <input
-                                        type="text"
-                                        name="detail"
-                                        value={detail}
-                                        onChange={handleInputChange}
-                                        maxLength={70}
-                                    />
+                                <div className="row mb-3">
+                                    <label htmlFor="detail" className={colLabel}>Categoria:</label>
+                                    <div className={colInput}>
+                                        <select
+                                            name="category"
+                                            value={category}
+                                            onChange={handleInputChange}
+                                            className='form-select'>
+                                            <option value="" selected>Seleccionar Categoria</option>
+                                            <option value="Tradicionales">Tradicionales</option>
+                                            <option value="Especiales">Especiales</option>
+                                            <option value="Vegetarianas">Vegetarianas</option>
+                                            <option value="Calzones">Calzones</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className='row mb-3'>
+                                    <label htmlFor="detail" className={colLabel}>Detalle:</label>
+                                    <div className={colInput}>
+                                        <textarea
+                                            type="text"
+                                            name="detail"
+                                            value={detail}
+                                            onChange={handleInputChange}
+                                            maxLength={70}
+                                            className='form-control text-area-form'
+                                        />
+                                    </div>
                                 </div>
                             </form>
                         </div>
