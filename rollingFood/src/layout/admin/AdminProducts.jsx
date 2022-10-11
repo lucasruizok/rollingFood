@@ -1,18 +1,19 @@
 import React, { useContext } from 'react'
-import { Space, Table } from 'antd';
+import { Space, Switch, Table } from 'antd';
 import { ModalAddProduct } from '../../components/modalAddProduct/ModalAddProduct';
 import { ModalEditProduct } from '../../components/modalEditProduct/ModalEditProduct';
 import { DataContext } from '../../context/DataContext';
 
 export const AdminProducts = () => {
 
-  const {pizzas, handleDeletePizza} = useContext(DataContext)
+  const { pizzas, handleDeletePizza, setPizzas } = useContext(DataContext);
+
   const columns = [
     {
       title: 'Imagen',
       dataIndex: 'imgUrl',
       key: 'imagen',
-      render: (urlImg) => <img src={urlImg} width={50} height={50}/>,
+      render: (urlImg) => <img src={urlImg} width={50} height={50} />,
     },
     {
       title: 'Pizza',
@@ -37,22 +38,45 @@ export const AdminProducts = () => {
       render: (precio) => (<span> $ {precio}</span>)
     },
     {
+      title: 'Descuento',
+      dataIndex: 'descuento',
+      key: 'descuento',
+      render: (descuento) => (<span> $ {descuento}</span>)
+    },
+    {
       title: 'Estado',
       dataIndex: 'estado',
       key: 'estado',
-      render: (estado) => (estado === true ? <span>Activo</span> : <span>Pasivo</span>)
+      render: (_, pizza) => (
+        pizza.estado ?
+          <div>
+            <Switch size="small" onClick={() => handleStatus(pizza)} checked='true' />
+            <span>Activo</span>
+          </div> :
+          <div>
+            <Switch size="small" onClick={() => handleStatus(pizza)} />
+            <span>Inactivo</span>
+          </div>
+      )
     },
     {
       title: 'Acciones',
       key: 'action',
       render: (pizza) => (
         <Space size="middle">
-          <ModalEditProduct idProduct={pizza._id}/>
-          <button onClick={()=> handleDeletePizza(pizza._id)} className='btn btn-danger'>Eliminar</button>
+          <ModalEditProduct idProduct={pizza._id} />
+          <button onClick={() => handleDeletePizza(pizza._id)} className='btn btn-danger'>Eliminar</button>
         </Space>
       ),
     },
   ];
+
+  const handleStatus = (pizza) => {
+    const newPizzas = [...pizzas];
+    const newPizza = newPizzas.find((pizzaDb) => pizzaDb.id === pizza.id);
+    newPizza.estado = !newPizza.estado;
+    setPizzas(newPizzas);
+  }
 
   return (
     <>

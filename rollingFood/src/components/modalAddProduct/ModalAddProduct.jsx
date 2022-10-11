@@ -24,7 +24,6 @@ export const ModalAddProduct = () => {
       detalle: detail,
       categoria: category
     }
-    console.log(formData)
     axios.post(`${URL}/product`, {
       formData
     })
@@ -71,6 +70,7 @@ export const ModalAddProduct = () => {
                   <div className={colInput}>
                     <input type="file"
                     name='file'
+                    disabled
                     value={file}
                       className='form-control'
                       ref={inputFileRef}
