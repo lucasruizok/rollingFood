@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Switch, Table, Tag, Space } from 'antd';
-import { ModalAdmin } from './ModalAdmin';
+import { Switch, Table, Space } from 'antd';
+import { ModalAdmin } from '../../components/modalAddUser/ModalAdmin';
 import axios from 'axios';
 import { useEffect } from 'react';
 import URL from '../../constGlobals';
@@ -10,16 +10,19 @@ import { deleteUser } from '../../services/api';
 export const AdminUsers = () => {
   const columns = [
     {
-      title: 'Nombre de Usuario',
+      title: 'Usuario',
       dataIndex: 'nameUser',
+      key:'nameUser'
     },
     {
-      title: 'Edad',
-      dataIndex: 'age',
+      title: 'Telefono Celular',
+      dataIndex: 'phone',
+      key:'phone'
     },
     {
       title: 'Email',
       dataIndex: 'mail',
+      key:'mail'
     },
     {
       title: 'Estado',
@@ -41,6 +44,7 @@ export const AdminUsers = () => {
     {
       title: 'Rol',
       dataIndex: 'role',
+      key:'role'
     },
     {
       title: 'Acciones',
@@ -68,8 +72,8 @@ export const AdminUsers = () => {
 
   async function getUsers() {
     const res = await axios.get(URL + '/users');
-    const usersDB = res.data.users
-    setData(usersDB)
+    const usersDB = res.data.users;
+    setData(usersDB);
   }
 
   function handleDeleteUser(user) {

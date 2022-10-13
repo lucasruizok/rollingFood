@@ -6,26 +6,20 @@ import { DataContext } from '../../context/DataContext';
 
 export const Navbar = () => {
     const links = [
-        // {
-        //     key:1,
-        //     title: 'Inicio',
-        //     path: '/',
-        //     protected: false
-        // },
         {
-            key: 2,
+            key: 1,
             title: 'Menu',
             path: 'menu',
             protected: false
         },
         {
-            key: 3,
+            key: 2,
             title: 'Conocenos',
             path: 'about',
             protected: false
         },
         {
-            key: 4,
+            key: 3,
             title: 'Administrador',
             path: 'admin',
             protected: true
@@ -54,14 +48,12 @@ export const Navbar = () => {
                 <button className='navbar-toggler' type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className='navbar-toggler-icon'></span>
                 </button>
-
                 <div className="collapse navbar-collapse menu" id="navbarNavDropdown">
                     <ul className='navbar-nav menu'>
                         {
-                            links.map(link => {
+                            links.map((link) => {
                                 return (
-                                    link.protected && !currentUser ? '' :
-
+                                    !link.protected ?
                                         <li className='nav-item' key={link.key}>
                                             <NavLink
                                                 onClick={() => collapsenavbar()}
@@ -74,10 +66,31 @@ export const Navbar = () => {
                                                 {link.title}
                                             </NavLink>
                                         </li>
+                                        :
+                                        ''
                                 )
                             })
                         }
-
+                        {
+                            links.map((link) => {
+                                return (
+                                    link.protected && currentUser?.role === 'admin' ?
+                                        <li className='nav-item' key={link.key}>
+                                            <NavLink
+                                                onClick={() => collapsenavbar()}
+                                                to={link.path}
+                                                style={({ isActive }) =>
+                                                    isActive ? activeStyle : undefined
+                                                }
+                                                className='nav-link'
+                                            >
+                                                {link.title}
+                                            </NavLink>
+                                        </li>
+                                        : ''
+                                )
+                            })
+                        }
                     </ul>
                     {!currentUser ? '' :
                         <>
@@ -92,8 +105,8 @@ export const Navbar = () => {
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
                                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-
-                                    </svg></NavLink>
+                                    </svg>
+                                </NavLink>
                                 <span className='item-total-pedidos'>{cart.length}</span>
                             </div>
                         </>
@@ -106,15 +119,15 @@ export const Navbar = () => {
                 }
                 {
                     currentUser ?
-                        <NavLink to='login'
+                        <NavLink to='/'
                             className='nav-link btn btn-dark p-2 mx-2 btnLogin'
                             onClick={() => logout()}>
-                            SALIR
+                            Salir
                         </NavLink>
                         :
                         <NavLink to='login'
                             className='nav-link btn btn-success p-2 mx-2 btnLogin'>
-                            INGRESAR
+                            Ingresar
                         </NavLink>
                 }
             </nav>

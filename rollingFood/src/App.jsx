@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 //componentes Ant Desing
 const { Header, Footer, Content } = Layout;
-import {  Layout } from 'antd';
+import { Layout } from 'antd';
 
 
 //componentes para react route
@@ -48,7 +48,7 @@ function App() {
                                                 element={<Menu />} />
                                           <Route
                                                 path='pedidos'
-                                                element={<PrivateRoutes><Pedidos /></PrivateRoutes>} />
+                                                element={<Pedidos />} />
                                           <Route
                                                 path='about'
                                                 element={<About />} />
@@ -58,26 +58,27 @@ function App() {
                                           <Route
                                                 path='register'
                                                 element={<Register />} />
-                                          <Route
-                                                path='admin'
-                                                element={<PrivateRoutes><Admin /></PrivateRoutes>}>
+                                          
                                                 <Route
-                                                      path='users'
-                                                      element={<AdminUsers />} />
-                                                <Route
-                                                      path='products'
-                                                      element={<AdminProducts />} />
-                                                <Route
-                                                      path='orders'
-                                                      element={<AdminOrders />} />
-                                          </Route>
+                                                      path='admin'
+                                                      element={<PrivateRoutes><Admin /></PrivateRoutes>}>
+                                                      <Route
+                                                            path='users'
+                                                            element={<AdminUsers />} />
+                                                      <Route
+                                                            path='products'
+                                                            element={<AdminProducts />} />
+                                                      <Route
+                                                            path='orders'
+                                                            element={<AdminOrders />} />
+                                                </Route>
                                           <Route
                                                 path='*'
                                                 element={<Error404 />} />
                                     </Routes>
                               </Content>
                               <Footer>
-                                    <FooterRolling></FooterRolling>
+                                    <FooterRolling />
                               </Footer>
                         </Layout>
                   </>

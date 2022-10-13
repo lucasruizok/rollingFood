@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(userLogin));
             localStorage.setItem('token', tokenLogin);
             openNotification('Login correcto', 'Ha ingresado correctamente', 'success')
-            setTimeout(() => { navigate('/menu') }, 1000)
+            setTimeout(() => { navigate('/') }, 1000)
         } catch (error) {
             openNotification('Login incorrecto', 'No pudo ingresar verificar datos ingresados', 'error')
         }
@@ -42,7 +42,7 @@ export const DataProvider = ({ children }) => {
         setToken(null)
         localStorage.removeItem('user')
         localStorage.removeItem('token')
-        navigate('/login')
+        navigate('login')
     }
 
     const addCart = (id) => {
