@@ -1,12 +1,12 @@
 import React from "react";
 import { Cart } from "../../components/cart/Cart";
-import "./pedidos.css"
+import "./orders.css"
 
-export const Pedidos = () => {
+export const Orders = () => {
  
   return (
     <div>
-      <h1>PEDIDO</h1>
+      <h1>Pedido</h1>
       <Cart/>
     </div>
   );

@@ -97,7 +97,7 @@ export const Navbar = () => {
                             <div className='cart-pedidos'>
                                 <NavLink
                                     onClick={() => collapsenavbar()}
-                                    to='pedidos'
+                                    to='orders'
                                     style={({ isActive }) =>
                                         isActive ? activeStyle : undefined
                                     }

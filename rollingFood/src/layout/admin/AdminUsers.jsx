@@ -5,24 +5,28 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import URL from '../../constGlobals';
 import { deleteUser } from '../../services/api';
+import { useContext } from 'react';
+import { DataContext } from '../../context/DataContext';
 
 
 export const AdminUsers = () => {
+  const [data, setData] = useState([]);
+
   const columns = [
     {
       title: 'Usuario',
       dataIndex: 'nameUser',
-      key:'nameUser'
+      key: 'nameUser'
     },
     {
       title: 'Telefono Celular',
       dataIndex: 'phone',
-      key:'phone'
+      key: 'phone'
     },
     {
       title: 'Email',
       dataIndex: 'mail',
-      key:'mail'
+      key: 'mail'
     },
     {
       title: 'Estado',
@@ -44,7 +48,7 @@ export const AdminUsers = () => {
     {
       title: 'Rol',
       dataIndex: 'role',
-      key:'role'
+      key: 'role'
     },
     {
       title: 'Acciones',
@@ -57,10 +61,10 @@ export const AdminUsers = () => {
       ),
     },
   ];
-  const [data, setData] = useState([]);
+
 
   useEffect(function () {
-    getUsers()
+    getUsers();
   }, [])
 
   const handleStatus = (user) => {
@@ -70,20 +74,29 @@ export const AdminUsers = () => {
     setData(newUsers);
   }
 
-  async function getUsers() {
+  const getUsers = async () => {
     const res = await axios.get(URL + '/users');
     const usersDB = res.data.users;
     setData(usersDB);
   }
-
-  function handleDeleteUser(user) {
-    deleteUser(user._id);
+  const handleDeleteUser = (user) => {
+    const tokenAdmin = localStorage.getItem('token');
+    const deleteUserConfirm = window.confirm(`Esta seguro de que quiere eliminar el usuario ${user.nameUser}`);
+    if(deleteUserConfirm){
+      console.log('quier',user)
+      deleteUser(user._id, tokenAdmin);
+      setData([...data].filter(userDB => userDB._id != user._id));
+    }
   }
+  const handleAddUser = (newUser) => {
+    setData([...data], newUser);
+  }
+
   return (
 
     <div className='container'>
       <h4>LISTA DE USUARIOS</h4>
-      <ModalAdmin />
+      <ModalAdmin handleAddUser={handleAddUser} />
       <hr />
       <Table columns={columns} dataSource={data} size="middle" />
     </div>

@@ -19,7 +19,7 @@ import { Error404 } from './layout/error404/Error404';
 import { Menu } from './layout/menu/Menu';
 import { Login } from './layout/login/Login';
 import { Register } from './layout/register/Register';
-import { Pedidos } from './layout/pedidos/Pedidos'
+import { Orders } from './layout/orders/Orders'
 import { About } from './layout/about/About';
 import { FooterRolling } from './layout/footer/FooterRolling';
 import { Admin } from './layout/admin/Admin';
@@ -47,8 +47,8 @@ function App() {
                                                 path='menu'
                                                 element={<Menu />} />
                                           <Route
-                                                path='pedidos'
-                                                element={<Pedidos />} />
+                                                path='orders'
+                                                element={<Orders />} />
                                           <Route
                                                 path='about'
                                                 element={<About />} />

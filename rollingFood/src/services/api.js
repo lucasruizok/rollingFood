@@ -33,11 +33,15 @@ const deleteProduct = (id) => {
     axios.delete(`${BASE_URL}/product/${id}`);
 }
 
-const deleteUser = (id) => {
-    axios.delete(`${BASE_URL}/user/${id}`)
-    .then((res) => console.log(res))
-    .catch((err)=>console.log(err))
-}
+const deleteUser = (id, token) => 
+    fetch(`${BASE_URL}/user/${id}`,{
+        method: "delete",
+        headers: new Headers({
+            Authorization: token,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          })
+    }).then((response) => response.json());
 
 export {
     createProduct,
