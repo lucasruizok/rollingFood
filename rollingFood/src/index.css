@@ -1,0 +1,13 @@
+#root {
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .btn-rolling{
+    background-color: #e24c1f;
+    color: #ffffff;
+  }
+  .btn-rolling:hover{
+    background-color: #852e14;
+    color: #ffffff;
+  }
