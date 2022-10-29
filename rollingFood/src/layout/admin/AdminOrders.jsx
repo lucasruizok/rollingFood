@@ -1,4 +1,4 @@
-import { Badge, Table } from 'antd';
+import { Table } from 'antd';
 import axios from 'axios';
 import React from 'react'
 import { useEffect } from 'react';
@@ -8,7 +8,7 @@ import { DataContext } from '../../context/DataContext';
 
 export const AdminOrders = () => {
   const { cart } = useContext(DataContext);
-  const URL = 'http://localhost:3400';
+  const URL = 'https://stark-scrubland-27201.herokuapp.com';
   const [pizzasOrders, setPizzasOrders] = useState([]);
   const [usersOrders, setUsersOrders] = useState([]);
 

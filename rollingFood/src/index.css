@@ -6,6 +6,8 @@
   .btn-rolling{
     background-color: #e24c1f;
     color: #ffffff;
+    padding: .4em 1.3em;
+    border-radius: 10px;
   }
   .btn-rolling:hover{
     background-color: #852e14;

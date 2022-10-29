@@ -3,49 +3,54 @@ import { Space, Switch, Table } from 'antd';
 import { ModalAddProduct } from '../../components/modalAddProduct/ModalAddProduct';
 import { ModalEditProduct } from '../../components/modalEditProduct/ModalEditProduct';
 import { DataContext } from '../../context/DataContext';
+import { useEffect } from 'react';
 
 export const AdminProducts = () => {
 
-  const { pizzas, handleDeletePizza, setPizzas } = useContext(DataContext);
+  const { pizzas, handleDeletePizza, setPizzas, getPizzas } = useContext(DataContext);
+
+  useEffect(() =>{
+    getPizzas();
+  },[])
 
   const columns = [
     {
       title: 'Imagen',
       dataIndex: 'imgUrl',
-      key: 'imagen',
+      key: 'imgUrl',
       render: (urlImg) => <img src={urlImg} width={50} height={50} />,
     },
     {
       title: 'Pizza',
-      dataIndex: 'nombre',
-      key: 'nombre',
+      dataIndex: 'productName',
+      key: 'productName',
       render: (text) => <span>{text}</span>,
     },
     {
       title: 'Categoria',
-      dataIndex: 'categoria',
-      key: 'categoria',
+      dataIndex: 'category',
+      key: 'category',
     },
     {
       title: 'Detalle',
-      dataIndex: 'detalle',
-      key: 'detalle',
+      dataIndex: 'detail',
+      key: 'detail',
     },
     {
       title: 'Precio',
-      dataIndex: 'precio',
-      key: 'precio',
+      dataIndex: 'price',
+      key: 'price',
       render: (precio) => (<span> $ {precio}</span>)
     },
     {
       title: 'Descuento',
-      dataIndex: 'descuento',
-      key: 'descuento',
+      dataIndex: 'discount',
+      key: 'discount',
       render: (descuento) => (<span> $ {descuento}</span>)
     },
     {
       title: 'Estado',
-      dataIndex: 'estado',
+      dataIndex: 'state',
       key: 'estado',
       render: (_, pizza) => (
         pizza.estado ?

@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = 'http://localhost:3400';
+const BASE_URL = 'https://stark-scrubland-27201.herokuapp.com';
 
 const createProduct = (data) =>
     fetch(`${BASE_URL}/product`, {

@@ -1,11 +1,9 @@
-import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
 const useForm = (initialState = {}, onSubmit) => {
     const [formData, setFormData] = useState(initialState);
     const [errors, setErrors] = useState({});
-    const inputFileRef = useRef();
     useEffect( () => {
         validate(initialState)
     }, [])
@@ -38,7 +36,7 @@ const useForm = (initialState = {}, onSubmit) => {
 
     const cleanFormData = (data)=> setFormData(data);
 
-    return { formData, handleInputChange, setFormData, handleSubmit, errors, cleanFormData, inputFileRef };
+    return { formData, handleInputChange, setFormData, handleSubmit, errors, cleanFormData };
 }
 
 export default useForm

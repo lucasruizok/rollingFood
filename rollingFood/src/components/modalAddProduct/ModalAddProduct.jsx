@@ -17,25 +17,32 @@ export const ModalAddProduct = () => {
   
   const onSubmit = () => {
     const formData={
-      imgUrl: imgUrl,
-      nombre: name,
-      precio: price,
-      descuento: discount,
-      detalle: detail,
-      categoria: category
+      imgUrl: img,
+      productName: name,
+      price: price,
+      discount: discount,
+      detail: detail,
+      category: category
     }
-    axios.post(`${URL}/product`, {
-      formData
-    })
-    setIsModalVisible(false);
-    getPizzas();
+    console.log(formData)
+    try{
+      axios.post(`https://stark-scrubland-27201.herokuapp.com/product`, {
+        formData
+      })
+      setIsModalVisible(false);
+      getPizzas();
+      console.log('try')
+    }
+    catch(error){
+      console.log(error);
+    }
   };
   
-  const { formData, handleInputChange, handleSubmit, inputFileRef } = useForm(
+  const { formData, handleInputChange, handleSubmit } = useForm(
     initialState,
     onSubmit
     );
-    const { name, price, discount, detail, category, file } = formData;
+    const { name, price, discount, detail, category, img } = formData;
     
     const showModal = () => {
       setIsModalVisible(true);
@@ -66,14 +73,14 @@ export const ModalAddProduct = () => {
               <h5 className='text-center mb-3'>Agregar Pizza</h5>
               <form onSubmit={handleSubmit} encType='multipart/form-data'>
                 <div className="row mb-3">
-                  <label htmlFor="formFile" className={colLabel}>Imagen Pizza</label>
+                  <label htmlFor="formFile" className={colLabel}>Url Imagen</label>
                   <div className={colInput}>
-                    <input type="file"
-                    name='file'
-                    disabled
-                    value={file}
-                      className='form-control'
-                      ref={inputFileRef}
+                    <input type="text"
+                    name='img'
+                    value={img}
+                    onChange={handleInputChange}
+                    className='form-control'
+                    placeholder='https'
                     />
                   </div>
                 </div>
@@ -94,7 +101,7 @@ export const ModalAddProduct = () => {
                   <label htmlFor="price" className={colLabel}>Precio: $</label>
                   <div className={colInput}>
                     <input
-                      type="number"
+                      type='number'
                       name="price"
                       value={price}
                       onChange={handleInputChange}
