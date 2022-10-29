@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 export const FooterRolling = () => {
     const socialLinks = [
         {
+            key:1,
             title: 'Instagram',
             path: 'https://www.instagram.com/',
             icon: 'instagram'
         },
         {
+            key:2,
             title: 'Facebook',
             path: 'https://www.facebook.com/',
             icon: 'facebook'
         },
         {
+            key:3,
             title: 'Twitter',
             path: 'https://twitter.com/?lang=es',
             icon: 'twitter'
@@ -33,7 +36,9 @@ export const FooterRolling = () => {
                             return (
                                 <li>
                                     <i className={'bi mx-1 bi-' + socialLink.icon}></i>
-                                    <Link to={socialLink.path}>
+                                    <Link
+                                    key={socialLink.key} 
+                                    to={socialLink.path}>
                                         {socialLink.title}
                                     </Link>
                                 </li>
