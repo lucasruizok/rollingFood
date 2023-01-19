@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Form, Modal, Button } from 'antd';
 import 'antd/dist/antd.css';
 import useForm from '../../useForm';
-import URL from '../../constGlobals';
 import '../../layout/admin/admin.css';
+import { DataContext } from '../../context/DataContext';
 
 export const ModalAdmin = ({ handleAddUser }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const initialState = { firstName: '', lastName: '', mail: '', nameUser: '', password: '', confirmPassword:'', age:0, phone:0 };
+    const {URL} = useContext(DataContext);
 
     const onSubmit = () => {
         if (password === confirmPassword) {

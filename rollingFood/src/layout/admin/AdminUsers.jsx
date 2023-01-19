@@ -1,17 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Switch, Table, Space } from 'antd';
 import { ModalAdmin } from '../../components/modalAddUser/ModalAdmin';
 import axios from 'axios';
-import { useEffect } from 'react';
-import URL from '../../constGlobals';
 import { deleteUser } from '../../services/api';
-import { useContext } from 'react';
 import { DataContext } from '../../context/DataContext';
 
 
 export const AdminUsers = () => {
   const [data, setData] = useState([]);
-
+  const {URL} = useContext(DataContext);
   const columns = [
     {
       title: 'Usuario',

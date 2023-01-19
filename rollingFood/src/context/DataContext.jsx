@@ -6,7 +6,7 @@ import { deleteProduct, getProducts } from "../services/api";
 
 export const DataContext = createContext();
 export const DataProvider = ({ children }) => {
-    const URL = 'http://localhost:3400';
+    const URL = 'https://stark-scrubland-27201.herokuapp.com';
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [pizzas, setPizzas] = useState([]);
@@ -93,7 +93,8 @@ export const DataProvider = ({ children }) => {
         setCart,
         addCart,
         handleDeletePizza,
-        getPizzas
+        getPizzas,
+        URL
     }
 
     return <DataContext.Provider value={data}>{children}</DataContext.Provider>

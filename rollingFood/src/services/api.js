@@ -1,24 +1,23 @@
 import axios from "axios";
-const BASE_URL = 'http://localhost:3400';
-
+const URL = 'https://stark-scrubland-27201.herokuapp.com';
 const createProduct = (data) =>
-    fetch(`${BASE_URL}/product`, {
+    fetch(`${URL}/product`, {
         body: JSON.stringify(data),
         method: 'post'
     }).then((response) => response.json())
 
 const getProducts = () =>
-    fetch(`${BASE_URL}/products`, {
+    fetch(`${URL}/products`, {
         method: "get"
     }).then((response) => response.json())
 
 const getProductById = (id) =>
-    fetch(`${BASE_URL}/productsById/${id}`, {
+    fetch(`${URL}/productsById/${id}`, {
         method: "get"
     }).then((response) => response.json())
 
 const editProduct = (data, id) => {
-    fetch(`${BASE_URL}/product/${id}`, {
+    fetch(`${URL}/product/${id}`, {
             body: JSON.stringify(data),
             method: "put",
             headers: new Headers({
@@ -30,11 +29,11 @@ const editProduct = (data, id) => {
 }
 
 const deleteProduct = (id) => {
-    axios.delete(`${BASE_URL}/product/${id}`);
+    axios.delete(`${URL}/product/${id}`);
 }
 
 const deleteUser = (id, token) => 
-    fetch(`${BASE_URL}/user/${id}`,{
+    fetch(`${URL}/user/${id}`,{
         method: "delete",
         headers: new Headers({
             Authorization: token,

@@ -1,23 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Modal, Button } from 'antd';
 import '../../index.css';
 import useForm from '../../useForm';
-import { useState } from 'react';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import URL from '../../constGlobals';
 import { DataContext } from '../../context/DataContext';
 
 export const ModalAddProduct = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const initialState = { name: '', price: null, discount: 0, detail: '', category: ''};
-  const { getPizzas } = useContext(DataContext)
+  const { getPizzas, URL } = useContext(DataContext)
   const colInput = 'col-9'
   const colLabel = 'col-3'
   
   const onSubmit = () => {
     const formData={
-      imgUrl: imgUrl,
+      imgUrl: 'imgUrl',
       nombre: name,
       precio: price,
       descuento: discount,

@@ -1,20 +1,5 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'antd/dist/antd.css';
-//componentes Ant Desing
-const { Header, Footer, Content } = Layout;
-import { Layout } from 'antd';
-
-
-//componentes para react route
-import {
-      Routes,
-      Route,
-} from "react-router-dom";
-
-//componentes propios
 import { Navbar } from './layout/navbar/Navbar';
-import { Main } from './layout/main/Main';
 import { Error404 } from './layout/error404/Error404';
 import { Menu } from './layout/menu/Menu';
 import { Login } from './layout/login/Login';
@@ -28,7 +13,15 @@ import { AdminProducts } from './layout/admin/AdminProducts';
 import { AdminOrders } from './layout/admin/AdminOrders';
 import { PrivateRoutes } from './routes/PrivateRoutes';
 import { DataProvider } from './context/DataContext';
-// Componente principal
+import { Layout } from 'antd';
+import {
+      Routes,
+      Route,
+} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'antd/dist/antd.css';
+const { Header, Footer, Content } = Layout;
+
 function App() {
 
       return (
